@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0c1b2a;
+  --color-panel: #ffffff;
+  --color-line: #e3e8ee;
+  --color-muted: #5b6b7c;
+  --color-accent: #0f7c8c;
+  --color-accent-soft: #e3f3f5;
+  --color-warn: #b45309;
+  --color-good: #15803d;
+  --color-bad: #b91c1c;
+  --font-sans: ui-sans-serif, -apple-system, "SF Pro Text", "Segoe UI", Inter, Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root { color-scheme: light dark; }
+html, body { background: #f4f6f8; color: var(--color-ink); }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #e6edf3;
+    --color-panel: #121c26;
+    --color-line: #233241;
+    --color-muted: #8ea0b2;
+    --color-accent: #3fb8c7;
+    --color-accent-soft: #11313a;
+  }
+  html, body { background: #0a121a; }
+}
+
+.card { background: var(--color-panel); border: 1px solid var(--color-line); border-radius: 14px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; border-radius: 10px; padding: .55rem .95rem; font-weight: 600; font-size: .9rem; border: 1px solid var(--color-line); background: var(--color-panel); transition: background .15s, border-color .15s; }
+.btn:hover { border-color: var(--color-accent); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+.btn-primary:hover { filter: brightness(1.08); }
+.input { width: 100%; border: 1px solid var(--color-line); border-radius: 10px; padding: .55rem .75rem; background: var(--color-panel); color: var(--color-ink); font-size: .95rem; }
+.input:focus { outline: 2px solid var(--color-accent); outline-offset: -1px; }
+.label { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--color-muted); }
+.chip { display: inline-block; font-size: .72rem; font-weight: 600; padding: .15rem .5rem; border-radius: 999px; background: var(--color-accent-soft); color: var(--color-accent); }
+
+/* Markdown answers */
+.prose-ct { line-height: 1.6; font-size: .97rem; }
+.prose-ct h1, .prose-ct h2, .prose-ct h3 { font-weight: 700; margin: 1.1em 0 .4em; line-height: 1.3; }
+.prose-ct h1 { font-size: 1.25rem; } .prose-ct h2 { font-size: 1.12rem; } .prose-ct h3 { font-size: 1rem; }
+.prose-ct p { margin: .55em 0; }
+.prose-ct ul, .prose-ct ol { margin: .5em 0 .5em 1.3em; }
+.prose-ct ul { list-style: disc; } .prose-ct ol { list-style: decimal; }
+.prose-ct li { margin: .2em 0; }
+.prose-ct code { font-family: var(--font-mono); font-size: .85em; background: var(--color-accent-soft); padding: .1em .3em; border-radius: 4px; }
+.prose-ct table { border-collapse: collapse; margin: .75em 0; font-size: .9rem; display: block; overflow-x: auto; }
+.prose-ct th, .prose-ct td { border: 1px solid var(--color-line); padding: .35em .6em; text-align: left; vertical-align: top; }
+.prose-ct th { background: var(--color-accent-soft); }
+.prose-ct strong { font-weight: 700; }
+.prose-ct blockquote { border-left: 3px solid var(--color-accent); padding-left: .8em; color: var(--color-muted); }
+
+.safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 4.5rem); }
+@media (min-width: 768px) { .safe-bottom { padding-bottom: 2rem; } }

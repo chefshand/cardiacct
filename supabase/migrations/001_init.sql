@@ -1,0 +1,4 @@
+-- Applied 2026-11-20 to Supabase project qyeybzodjmjezckboifp via MCP (migration "cardiacct_init").
+-- Kept here for reference. See the live schema with: select * from information_schema.tables where table_schema = 'cardiacct';
+-- Tables: docs, chunks (FTS), cards, card_reviews, questions, attempts, conversations, messages, notes, usage, settings.
+-- RLS enabled on all tables; no grants to anon/authenticated; schema not exposed to the Data API.
