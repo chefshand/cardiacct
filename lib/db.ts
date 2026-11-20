@@ -10,13 +10,17 @@ declare global {
 function make() {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("DATABASE_URL is not set");
-  return postgres(url, {
+  // max_pipeline is a supported runtime option that is missing from postgres.js's TypeScript types.
+  const options = {
     prepare: false, // required for Supabase transaction pooler (port 6543)
-    max: 3,
-    idle_timeout: 20,
+    max_pipeline: 1, // no pipelining: Supavisor transaction mode can hang on pipelined queries
+    max: 5,
+    idle_timeout: 10,
+    max_lifetime: 60 * 5,
     connect_timeout: 15,
-    ssl: "require",
-  });
+    ssl: "require" as const,
+  };
+  return postgres(url, options as postgres.Options<Record<string, postgres.PostgresType>>);
 }
 
 export function db() {
