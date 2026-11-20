@@ -8,13 +8,17 @@ declare global {
 }
 
 function make() {
-  const url = process.env.DATABASE_URL;
-  if (!url) throw new Error("DATABASE_URL is not set");
+  const raw = process.env.DATABASE_URL;
+  if (!raw) throw new Error("DATABASE_URL is not set");
+  // Use Supavisor *session* mode (5432) rather than transaction mode (6543): in transaction mode the
+  // multi-step extended-protocol exchange postgres.js uses for parameterized queries can be split
+  // across backends when queries run concurrently, which left requests hanging.
+  const url = raw.replace(/\.pooler\.supabase\.com:6543\//, ".pooler.supabase.com:5432/");
   // max_pipeline is a supported runtime option that is missing from postgres.js's TypeScript types.
   const options = {
-    prepare: false, // required for Supabase transaction pooler (port 6543)
-    max_pipeline: 1, // no pipelining: Supavisor transaction mode can hang on pipelined queries
-    max: 5,
+    prepare: false,
+    max_pipeline: 1,
+    max: 3,
     idle_timeout: 10,
     max_lifetime: 60 * 5,
     connect_timeout: 15,
