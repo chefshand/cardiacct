@@ -43,7 +43,7 @@ export default async function Dashboard() {
             {s.daily.map((d) => {
               const n = d.cards + d.questions;
               return (
-                <div key={d.day} className="flex-1 flex flex-col justify-end" title={`${d.day}: ${d.cards} cards, ${d.questions} questions`}>
+                <div key={d.day} className="flex-1 h-full flex flex-col justify-end" title={`${d.day}: ${d.cards} cards, ${d.questions} questions`}>
                   <div className="rounded-sm bg-[var(--color-accent)]" style={{ height: `${Math.max(n ? 6 : 2, (n / max) * 100)}%`, opacity: n ? 1 : 0.2 }} />
                 </div>
               );
